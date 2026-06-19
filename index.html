@@ -392,13 +392,14 @@
   let running = false;
   const setPhase = p => phone.setAttribute('data-phase', p);
 
+  const OPEN_PAUSE = 3500;   // hold on the closed envelope before the flap opens
   function playReveal() {
     if (running || phone.getAttribute('data-phase') !== 'idle') return;
     running = true;
-    setPhase('opening');
-    setTimeout(() => setPhase('emerging'), 750);
-    setTimeout(() => setPhase('center'),  1650);
-    setTimeout(() => { setPhase('done'); running = false; }, 2750);
+    setTimeout(() => setPhase('opening'),  OPEN_PAUSE);
+    setTimeout(() => setPhase('emerging'), OPEN_PAUSE + 750);
+    setTimeout(() => setPhase('center'),   OPEN_PAUSE + 1650);
+    setTimeout(() => { setPhase('done'); running = false; }, OPEN_PAUSE + 2750);
   }
 
 /* =====================================================================
